@@ -27,7 +27,12 @@ const ExpoSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "User",
     default: [],
-  }
+  },
+  attendants: {
+    type: [Schema.Types.ObjectId],
+    ref: "User",
+    default: [],
+  } 
 }, { timestamps: true, versionKey: false });
 
 module.exports = Mongoose.model("Expo", ExpoSchema);

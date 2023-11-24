@@ -1,5 +1,6 @@
 {
   "SYSADMIN": "sysadmin",
   "ADMIN": "admin",
+  "SCANNER": "scanner",
   "USER": "user"
 }

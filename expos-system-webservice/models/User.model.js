@@ -18,6 +18,10 @@ const userSchema = new Schema({
     unique: true,
     lowercase:true
   },
+  name: {
+    type: String,
+    required: true,
+  },
   hashedPassword: {
     type: String,
     required: true
@@ -32,6 +36,13 @@ const userSchema = new Schema({
   roles: {
     type: [String],
     default: []
+  },
+  team: {
+    type: {
+      number: Number,
+      section: Number,
+      _id: false
+    }
   }
 }, { timestamps: true });
 

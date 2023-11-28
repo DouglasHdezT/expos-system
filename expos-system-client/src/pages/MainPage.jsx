@@ -42,7 +42,7 @@ const MainPage = ({ own=false }) => {
   return (
     <main className="w-full min-h-screen flex flex-col">
       <Header />
-      <section className="flex-1 w-3/4 p-4 self-center flex flex-col gap-16">
+      <section className="flex-1 w-full lg:w-3/4 p-4 self-center flex flex-col gap-16">
         { (Object.keys(expos).length > 0) ? 
           Object.keys(expos).map(date => (
             <ExposTable key={`${date}_table`} 

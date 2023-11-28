@@ -3,7 +3,7 @@ import { useUserContext } from "../../context/UserContext";
 const SubscribeModal = ({ id="", onSubscribe = () => {}, expo={} }) => {
   const { user } = useUserContext();
 
-  const alreadySub = expo.subs?.findIndex(_u => user.username === _u.username) >= 0;
+  const alreadySub = expo.subs?.findIndex(_u => user?.username === _u.username) >= 0;
 
   return (
     <dialog id={id} className="modal">

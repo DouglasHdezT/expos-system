@@ -41,11 +41,11 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
           <thead>
             <tr>
               <th></th>
-              <th> Date </th>
-              <th> Expo </th>
-              <th> Team </th>
-              <th> Subs </th>
-              <th> Join? </th>
+              <th className="text-center"> Date </th>
+              <th className="text-center"> Expo </th>
+              <th className="text-center"> Team </th>
+              <th className="text-center"> Subs </th>
+              <th className="text-center"> Join? </th>
             </tr>
           </thead>
           <tbody>

@@ -117,7 +117,7 @@ controller.toggleSub = async (req, res, next) => {
     if(alreadySub) {
       _subs = _subs.filter(_s => !_s.equals(userId));
     } else {
-      if( expo.capacity !== -1 && _subs >= expo.capacity) {
+      if( expo.capacity !== -1 && _subs.length >= expo.capacity) {
         return res.status(409).json({ error: "Expo capacity is full" })
       }
 

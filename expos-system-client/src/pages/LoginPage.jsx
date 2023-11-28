@@ -1,9 +1,11 @@
 import { toast } from "react-toastify";
 import { useUserContext } from "../context/UserContext";
 import background from "../assets/bg-login.jpg";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login } = useUserContext();
+  const navigate = useNavigate();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ const LoginPage = () => {
 
     if(status) {
       toast("Login successful!", { type: "success" });
+      navigate("/");
     } else {
       toast("Something wrong!", { type: "error" });
     }

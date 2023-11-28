@@ -14,10 +14,10 @@ export const UserContextProvider = (props) => {
 
   useEffect(() => {
     const _verify = async () => {
+      startLoading();
       if(token) {
-        startLoading();
         const _user = await whoami(token);
-      
+        
         if(_user) {
           axios.defaults.headers.common.Authorization = `Bearer ${token}`; 
           setUser(_user);
@@ -25,8 +25,12 @@ export const UserContextProvider = (props) => {
           setToken(null) 
           clearToken(); 
         }
-        stopLoading();
+      } else {
+        axios.defaults.headers.common.Authorization = undefined;
+        setUser(null);
+        clearToken(); 
       }
+      stopLoading();
     }
 
     _verify()
@@ -48,13 +52,18 @@ export const UserContextProvider = (props) => {
     return status;
   }, [startLoading, stopLoading]);
 
+  const handleLogout = useCallback(() => {
+    setToken(null);
+  }, []);
+
   const value = useMemo(()=> (
     {
       user,
       token, 
       login: handleLogin,
+      logout: handleLogout,
     }
-  ), [user, token, handleLogin]);
+  ), [user, token, handleLogin, handleLogout]);
   
   return <UserContext.Provider value={value} {...props} />
 }

@@ -9,7 +9,7 @@ const { idInParamsValidator, saveValidator, attendValidator } = require("../vali
 const { authentication, authorization } = require("../middlewares/auth.middlewares");
 
 router.get("/", expoController.findAll);
-router.get("/own", authentication, authorization(ROLES.USER), idInParamsValidator, runValidation, expoController.findOwn);
+router.get("/own", authentication, authorization(ROLES.USER), expoController.findOwn);
 router.get("/stats", authentication, authorization(ROLES.SYSADMIN), expoController.getStats)
 router.get("/:identifier", idInParamsValidator, runValidation, expoController.findById);
 

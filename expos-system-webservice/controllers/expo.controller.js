@@ -40,7 +40,7 @@ controller.save = async (req, res, next) => {
 controller.findAll = async (req, res, next) => {
   try {
     const expos = 
-      await Expo.find({})
+      await Expo.find({}, undefined, { sort: [{ date: 1 }] })
         .populate("subs", "username name")
         .populate("attendants", "username name");
     
@@ -73,7 +73,7 @@ controller.findOwn = async (req, res, next) => {
   try {
     const { _id: userId } = req.user;
     const expos = 
-      await Expo.find({ subs: userId })
+      await Expo.find({ subs: userId }, undefined, { sort: [{ date: 1 }] })
         .populate("subs", "username name")
         .populate("attendants", "username name");
     
@@ -129,6 +129,7 @@ controller.toggleSub = async (req, res, next) => {
       _subs = [..._subs, userId];
     }
 
+    expo["subs"] = _subs;
     const expoSaved = await (await expo.save())
       .populate("subs", "username name");
 
@@ -168,6 +169,8 @@ controller.toggleAttendant = async (req, res, next) => {
 
       _attendants = [..._attendants, attendant];
     }
+
+    expo["attendants"] = _attendants;
 
     const expoSaved = await (await expo.save())
       .populate("attendants", "username name");

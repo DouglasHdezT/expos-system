@@ -15,7 +15,7 @@ const CriteriaPage = () => {
       startLoading();
       const evaluation = await fetchEvaluation();
 
-      if(!evaluation) {
+      if (!evaluation) {
         toast("Evaluation not found", { type: "error" });
       } else {
         setCriteria(evaluation.criteria);
@@ -28,7 +28,7 @@ const CriteriaPage = () => {
     _fetch();
   }, [startLoading, stopLoading]);
 
-  if(!criteria || !requirements) {
+  if (!criteria || !requirements) {
     return (
       <div className="flex-1 flex justify-center items-center">
         <h1> No Evaluation! </h1>
@@ -41,21 +41,18 @@ const CriteriaPage = () => {
       <Header />
 
       <section className="flex-1 w-full lg:w-3/4 p-4 self-center flex flex-col gap-4">
-        <h2 className="divider divider-accent text-accent font-bold text-3xl"> 
-          Requirements 
+        <h2 className="divider divider-accent text-accent font-bold text-3xl">
+          Requirements
         </h2>
 
-        {
-          requirements.map((_r, i) => (
-            <div key={i} role="alert" className="alert">
-              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <span> {_r} </span>
-            </div>
-          ))
-        }
+        <div className="flex">
 
-        <h2 className="divider divider-accent text-accent font-bold text-3xl"> 
-          Evaluation Criteria 
+          <Requirement requirements={requirements} />
+
+        </div>
+
+        <h2 className="divider divider-accent text-accent font-bold text-3xl">
+          Evaluation Criteria
         </h2>
 
         <div className="overflow-x-auto">
@@ -72,20 +69,20 @@ const CriteriaPage = () => {
               {
                 criteria.map((_c, i) => (
                   <tr key={i} className="hover">
-                    <th>{ i+1 }</th>
+                    <th>{i + 1}</th>
                     <td className="min-w-[200px]">
                       <p className="text-xl text-justify font-light overflow-hidden text-ellipsis">
-                        { _c.metric }
+                        {_c.metric}
                       </p>
                     </td>
                     <td className="max-w-md min-w-[350px]">
                       <ul>
                         {
                           _c.clarifications.map((item, j) => (
-                            <li key={`${i}_${j}`} 
-                              className="text-justify font-light text-lg marker:content-['λ'] ps-2"> 
-                                {item} 
-                            </li>   
+                            <li key={`${i}_${j}`}
+                              className="text-justify font-light text-lg marker:content-['λ'] ps-2">
+                              {item}
+                            </li>
                           ))
                         }
                       </ul>
@@ -97,7 +94,7 @@ const CriteriaPage = () => {
                       </div>
                     </td>
                   </tr>
-                )) 
+                ))
               }
             </tbody>
           </table>
@@ -105,6 +102,24 @@ const CriteriaPage = () => {
       </section>
     </main>
   );
+}
+
+const Requirement = ({ requirements }) => {
+  return (
+    <ul className="grid lg:grid-cols-2 w-full gap-4 h-full items-center">
+      {
+        requirements.map((_r, i) => (
+          <li key={i} data-content="" className={`sm:w-96 text-start m-auto w-full`}>
+            <div className="w-full px-6 py-4 bg-base-200 shadow rounded hover:scale-125 transition-all border-gradient border border-transparent hover:border-primary">
+              <div className="">
+                {_r}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  )
 }
 
 export default CriteriaPage;

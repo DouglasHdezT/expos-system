@@ -6,7 +6,7 @@ const authController = require("../controllers/auth.controller");
 const { registerValidator } = require("../validators/auth.validators");
 const { authentication } = require("../middlewares/auth.middlewares");
 
-router.post("/register",
+process.env.REGISTER && router.post("/register",
   registerValidator,
   runValidation,
   authController.register

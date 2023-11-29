@@ -4,7 +4,7 @@ const token_key = "expos-system-token";
 
 export const login = async (identifier, password) => {
   try {
-    const { data } = await axios.post("/auth/login", { identifier, password });
+    const { data } = await axios.post("/api/auth/login", { identifier, password });
     return data.token;
   } catch (error) {
     return null;
@@ -13,7 +13,7 @@ export const login = async (identifier, password) => {
 
 export const whoami = async (token="") => {
   try {
-    const { data } = await axios.get("/auth/whoami", { headers: { Authorization: `Bearer ${token}` } });
+    const { data } = await axios.get("/api/auth/whoami", { headers: { Authorization: `Bearer ${token}` } });
     return data;   
   } catch (error) {
     return null;

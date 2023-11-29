@@ -52,7 +52,7 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
             {
               expos.map((_e, i) => (
                 <tr key={_e._id} onClick={()=> onClickExpoHandler(_e)} className="hover cursor-pointer">
-                  <th> {i} </th>
+                  <th> {i + 1} </th>
                   <td>
                     <p className="flex items-center justify-start gap-2">
                       <MdCalendarToday className="text-primary" /> {new Date(_e.date).toLocaleDateString()}
@@ -66,9 +66,9 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
                     </p>
                   </td>
                   <td className="max-w-md">
-                  <p className="text-3xl font-light overflow-hidden text-ellipsis">
-                        { _e.project }
-                      </p>
+                    <p className="text-3xl font-light overflow-hidden text-ellipsis">
+                      { _e.project }
+                    </p>
                   </td>
                   <td>
                     <div className="stat place-items-center">

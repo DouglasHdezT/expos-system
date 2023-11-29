@@ -1,0 +1,76 @@
+{
+  "requirements": [
+    "Assistance to the 7 defenses (apart from his own).",
+    "Face-to-face group defense.",
+    "Release into repository with all the requested information.",
+    "Correct use of issues in the repository.",
+    "Correct use of branches, with a clear workflow (develop branch with small branches for each feature).",
+    "Open source license.",
+    "All products deployed in cloud services (PaaS or SaaS).",
+    "All files and source code defined in the deliverables section.",
+    "All products are functional and connected to each other.",
+    "Inside the README of the repository: Test users, Installation guide, User manual, Links of interest (e.g. API documentation)"
+  ],
+  "criteria": [
+    {
+      "metric": "Presentation Skills",
+      "clarifications": [
+        "Clarity in project communication",
+        "Organization and structure of the presentation",
+        "Ability to convey technical concepts understandably to the audience"
+      ],
+      "points": 20
+    },
+    {
+      "metric": "System Presentation, Sales, and Persuasion",
+      "clarifications": [
+        "Ability to highlight system benefits and features",
+        "Skill in persuading and convincing the audience of the project's value",
+        "Effective use of examples and demonstrations to showcase the system in action",
+        "Formal or semi-formal attire (dress to impress)",
+        "Correct use of the stage"
+      ],
+      "points": 25
+    },
+    {
+      "metric": "Correct Implementation of Features",
+      "clarifications": [
+        "Implemented features meet the requirements outlined in the definition",
+        "Consideration of the quality and performance of implemented features",
+        "Proper handling of errors and exceptions"
+      ],
+      "points": 20
+    },
+    {
+      "metric": "Teamwork and GitHub Usage",
+      "clarifications": [
+        "Effective collaboration and equitable distribution of tasks among team members",
+        "Appropriate use of version control tools like Git and GitHub",
+        "Clear and understandable commit history in the GitHub repository",
+        "Correct use of Issues for project task management",
+        "Use of a workflow where the main branch is protected, there is a development branch, and features are implemented in short-lived branches",
+        "Merges occur through a Pull Request, with approval from at least 2 team members",
+        "Creation of a release on GitHub containing important information about the system"
+      ],
+      "points": 15
+    },
+    {
+      "metric": "System Deployment in the Cloud",
+      "clarifications": [
+        "Correct configuration and deployment of the system on a cloud platform",
+        "Consideration of aspects such as security, scalability, and availability in the deployment environment",
+        "Demonstration of access and operation of the system in the cloud environment"
+      ],
+      "points": 10
+    },
+    {
+      "metric": "UI/UX Design",
+      "clarifications": [
+        "Evaluation of the user interface in terms of aesthetics, usability, and user experience",
+        "Consideration of best design practices and good design decisions",
+        "Consistency in the appearance and experience of the system across all screens and flows"
+      ],
+      "points": 10
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import daisyui from 'daisyui'
 import typo from "@tailwindcss/typography";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -8,7 +9,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      minWidth: {
+        ...defaultTheme.screens
+      }
+    },
   },
   plugins: [typo, daisyui],
 }

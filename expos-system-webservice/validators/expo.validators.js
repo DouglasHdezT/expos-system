@@ -9,7 +9,10 @@ validators.idInParamsValidator = [
 ];
 
 validators.attendValidator = [
-  body("attendant")
+  body("attendants")
+    .notEmpty().withMessage("Is Required")
+    .isArray().withMessage("Must be an array"),
+  body("attendants.*")
     .notEmpty().withMessage("Is Required")
     .isMongoId().withMessage("Must be a mongo id")
 ]

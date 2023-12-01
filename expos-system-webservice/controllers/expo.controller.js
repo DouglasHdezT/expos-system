@@ -1,6 +1,7 @@
 const debug  = require("debug")("app:expo-controller");
 const User = require('../models/User.model');
 const Expo = require("../models/Expo.model");
+const { Types } = require("mongoose");
 
 const controller = {};
 
@@ -141,7 +142,7 @@ controller.toggleSub = async (req, res, next) => {
 
 controller.toggleAttendant = async (req, res, next) => {
   try {
-    const { attendant } = req.body;
+    const { attendants } = req.body;
     const { identifier } = req.params;
 
     const expo = await Expo.findById(identifier)
@@ -151,23 +152,26 @@ controller.toggleAttendant = async (req, res, next) => {
       return res.status(404).json({ error: "Expo not found" });
     }
 
-    const user = await User.findById(attendant);
-    if(!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
     let _attendants = [...expo.attendants];
-    const alreadyAttend = _attendants.findIndex(_a => _a.equals(user._id)) >= 0;
 
-    if(alreadyAttend) {
-      _attendants = _attendants.filter(_a => !_a.equals(user._id));
-    } else {
-      if (expo.team["number"] === user.team?.number 
-      && expo.team["section"] === user.team?.section) {
-        return res.status(403).json({error: "Forbidden action"});
+    for(const attendant of attendants) {
+      const user = await User.findById(attendant);
+      if(!user) {
+        return res.status(404).json({ error: "User not found" });
       }
+      //debug(_attendants)
+      const alreadyAttend = _attendants.findIndex(_a => _a.equals(user._id)) >= 0;
 
-      _attendants = [..._attendants, attendant];
+      if(alreadyAttend) {
+        _attendants = _attendants.filter(_a => !_a.equals(user._id));
+      } else {
+        if (expo.team["number"] === user.team?.number 
+        && expo.team["section"] === user.team?.section) {
+          return res.status(403).json({error: "Forbidden action"});
+        }
+
+        _attendants = [..._attendants, new Types.ObjectId(attendant)];
+      }
     }
 
     expo["attendants"] = _attendants;
@@ -199,10 +203,11 @@ controller.getStats = async (req, res, next) => {
         }
 
         data.attends = [...data.attends, _e._id];
+        stats[_a._id] = data;
       })
     });
 
-    return res.stats(200).json(stats);
+    return res.status(200).json(stats);
   } catch (error) {
     next(error);
   }

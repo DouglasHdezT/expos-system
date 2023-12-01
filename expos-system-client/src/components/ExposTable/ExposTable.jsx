@@ -1,15 +1,21 @@
-import { MdCalendarToday, MdWatchLater } from "react-icons/md";
+import { useState } from "react";
 import { toast } from "react-toastify";
+
+import { MdCalendarToday, MdWatchLater } from "react-icons/md";
 import { BiWorld } from "react-icons/bi";
 import { FaPlay } from 'react-icons/fa';
-import { useState } from "react";
+
 import { useConfigContext } from "../../context/ConfigContext";
-import { toggleSubs } from "../../services/expos.services";
+import { useUserContext } from "../../context/UserContext";
+import { toggleSubs, toggleAttend } from "../../services/expos.services";
+
 import SubscribeModal from "../SubscribeModal/SubscribeModal";
+import AttendsModal from "../AttendsModal/AttendsModal";
 
 const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
   const [expoSelected, setExpoSelected] = useState({});
   const { startLoading, stopLoading } = useConfigContext();
+  const { user } = useUserContext();
 
   const onClickExpoHandler = (expo) => {
     setExpoSelected(expo);
@@ -24,6 +30,7 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
       
       if(status) {
         toast(alreadySub ? "Unsubscribed!" : "Subscribed!", { type: "success" });
+        setExpoSelected({});
         update();
       } else {
         toast("Ups! An error ocurred", { type: "error" });
@@ -32,6 +39,20 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
 
     stopLoading();
   }
+
+  const onUpdateAttendantsHandler = async (expo ,ids = []) => {
+    startLoading();
+
+    if(ids.length > 0) {
+
+      await toggleAttend(expo, ids);
+
+      setExpoSelected({});
+      update();
+    }
+
+    stopLoading();
+  } 
 
   return (
     <>
@@ -92,7 +113,11 @@ const ExposTable = ({ date= new Date(), expos=[], update = ()=> {} }) => {
           </tbody>
         </table>
       </div>
-      <SubscribeModal id={`modal-${date}`} expo={expoSelected} onSubscribe={onSubscribeHandler}/>
+      {
+        (user && (user.roles.includes("scanner") || user.roles.includes("sysadmin"))) ?
+          <AttendsModal id={`modal-${date}`} expo={expoSelected} onUpdateAttendants={onUpdateAttendantsHandler}/> :
+          <SubscribeModal id={`modal-${date}`} expo={expoSelected} onSubscribe={onSubscribeHandler}/>
+      }
     </>
   );
 }

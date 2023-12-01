@@ -36,6 +36,24 @@ export const toggleSubs = async (_id) => {
   }
 } 
 
+export const toggleAttend = async (expo, attendants) => {
+  try {
+    const { data } = await axios.post(`/api/expo/attend/${expo}`, { attendants });
+    return data;
+  } catch (error) {
+    return false;
+  }
+} 
+
+export const fetchStats = async () => {
+  try {
+    const { data } = await axios.get("/api/expo/stats");
+    return data;
+  } catch (error) {
+    return [];
+  }
+}
+
 export const fetchEvaluation = async () => {
   try {
     const { data } = await axios.get("/evaluation.json");

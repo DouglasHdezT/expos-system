@@ -14,7 +14,7 @@ router.get("/stats", authentication, authorization(ROLES.SYSADMIN), expoControll
 router.get("/:identifier", idInParamsValidator, runValidation, expoController.findById);
 
 process.env.SUBS && router.post("/sub/:identifier", authentication, authorization(ROLES.USER), idInParamsValidator, runValidation, expoController.toggleSub);
-router.post("/attend/:identifier", authentication, authorization(ROLES.SCANNER), attendValidator, idInParamsValidator, runValidation, expoController.toggleSub);
+router.post("/attend/:identifier", authentication, authorization(ROLES.SCANNER), attendValidator, idInParamsValidator, runValidation, expoController.toggleAttendant);
 router.post(["/", "/:identifier"], authentication, authorization(ROLES.ADMIN), saveValidator, runValidation, expoController.save);
 
 router.delete("/:identifier", authentication, authorization(ROLES.ADMIN), idInParamsValidator, runValidation, expoController.delete);

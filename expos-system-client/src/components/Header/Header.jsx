@@ -16,6 +16,7 @@ const Header = () => {
             </div>
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-300 rounded-box w-52">
               <li><Link to={"/evaluation"}> Evaluation criteria </Link></li>
+              <li><Link to={"/stats"}> Stats </Link></li>
             </ul>
           </div>
         </div>
